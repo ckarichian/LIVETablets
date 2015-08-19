@@ -1,0 +1,461 @@
+<h4 class="accordion-toggle">Text Question</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <input type="hidden" name="type" value="text" class="used">
+        <input type="hidden" name="optionsType" value="none" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Number Question</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <input type="hidden" name="type" value="number" class="used">
+        <input type="hidden" name="optionsType" value="none" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Big Text Question</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="options">Lines:</label>
+        <input type="text" id="options" name="options" placeholder="How many lines should be visible" class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <input type="hidden" name="type" value="bigtext" class="used">
+        <input type="hidden" name="optionsType" value="text" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Single Choice Radio</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="20%">Code</th>
+                <th>Value</th>
+                <th width="2%">
+                    <button type="button" class="action-button" onClick="addOption(this); this.blur();"
+                            style="max-width: 55px">
+                        Add Option
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <input type="hidden" name="type" value="radio" class="used">
+        <input type="hidden" name="optionsType" value="list" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Timed Single Choice Radio</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="20%">Code</th>
+                <th>Value</th>
+                <th width="2%">
+                    <button type="button" class="action-button" onClick="addOption(this); this.blur();"
+                            style="max-width: 55px">
+                        Add Option
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <input type="hidden" name="type" value="timedRadio" class="used">
+        <input type="hidden" name="optionsType" value="list" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Drop Down List</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="20%">Code</th>
+                <th>Value</th>
+                <th width="2%">
+                    <button type="button" class="action-button" onClick="addOption(this); this.blur();"
+                            style="max-width: 55px">
+                        Add Option
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <input type="hidden" name="type" value="dropdown" class="used">
+        <input type="hidden" name="optionsType" value="list" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+<h4 class="accordion-toggle">Checkboxes</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+        <table class="table">
+            <thead>
+            <tr>
+                <th width="20%">Code</th>
+                <th>Value</th>
+                <th width="2%">
+                    <button type="button" class="action-button" onClick="addOption(this); this.blur();"
+                            style="max-width: 55px">
+                        Add Option
+                    </button>
+                </th>
+            </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+
+        <input type="hidden" name="type" value="checkbox" class="used">
+        <input type="hidden" name="optionsType" value="list" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Yes/No</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+
+
+        <input type="hidden" name="type" value="yesno" class="used">
+        <input type="hidden" name="optionsType" value="none" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+<h4 class="accordion-toggle">Tapper</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Question:</label>
+        <input type="text" name="title" placeholder="Enter the question text" maxlength="255" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="options">Text:</label>
+        <input type="text"  name="options" placeholder="What is the text on the tapper" class="used"/>
+
+        <div class="clear"></div>
+        <br>
+
+
+        <input type="hidden" name="type" value="tapper" class="used">
+        <input type="hidden" name="optionsType" value="text" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Text Block</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Text:</label>
+        <input type="text" name="title" placeholder="Enter the text" maxlength="255" class="used"/>
+
+
+        <div class="clear"></div>
+
+
+        <input type="hidden" name="type" value="block" class="used">
+        <input type="hidden" name="hint" value="" class="used">
+        <input type="hidden" name="optionsType" value="none" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>
+
+
+<h4 class="accordion-toggle">Slider</h4>
+
+<div class="accordion-content">
+
+    <form>
+
+        <label for="code">Question code:</label>
+        <input type="text" name="code" placeholder="Enter a UNIQUE code for your question" maxlength="25" class="used"/>
+
+        <div class="clear"></div>
+
+        <label for="title">Text:</label>
+        <input type="text" name="title" placeholder="Enter the text" maxlength="255" class="used"/>
+
+
+        <div class="clear"></div>
+
+        <label for="hint">Hint:</label>
+        <input type="text" name="hint" placeholder="Optional: Enter a hint or supporting text for the question"
+               class="used"/>
+
+        <div class="clear"></div>
+
+        <table>
+            <tr>
+                <td>Min Label</td>
+                <td>
+                    Mid Label
+                </td>
+                <td>Max Label</td>
+            </tr>
+
+            <tr>
+                <td><input type="text" name="min" maxlength="65" class="used"/></td>
+                <td><input type="text" name="mid" maxlength="65" class="used"/></td>
+                <td><input type="text" name="max" maxlength="65" class="used"/></td>
+            </tr>
+        </table>
+
+
+        <input type="hidden" name="type" value="slider" class="used">
+        <input type="hidden" name="optionsType" value="slider" class="used">
+        <input type="reset" value="Cancel" class="delete-button" onClick="$('.shade').toggle()" style="width: 100px">
+        <input type="button" value="Add" class="action-button" style="width: 100px" onclick="pushQuestion(this);">
+    </form>
+
+    <div class="clear"></div>
+
+</div>

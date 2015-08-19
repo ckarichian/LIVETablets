@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Tablet Survey Window</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+		<link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" href="css/font-awesome.css">
+	</head>
+	<body>
+
+        <div class="slide" id="questionSlide" style="z-index:3; display:none;">
+            <div class="header">
+                <div id="headercontent" class="content">
+
+                </div>
+            </div>
+
+            <div class="container">
+            <!--
+            -->
+            </div>
+        </div>
+
+        <div class="wait" id="waitSlide" style="z-index: 1;">
+            <h2 id="waitText">
+                There has been a critical error
+            </h2>
+        </div>
+
+        <div class="blankScreen" id="blankScreen">
+
+        </div>
+
+        <div class="slide" id="signatureSlide">
+            <h3>
+                To confirm that you consent, please sign in the box below with your finger, then click the button:
+            </h3>
+            <div id="simple_sketch"></div>
+            <br />
+
+            <div class="button hereby" onClick="render('demographics')">
+                I Hereby Consent
+            </div>
+        </div>
+
+        <script src="js/modules.js"></script>
+        <script src="js/libraries.js"></script>
+        <script src="data/CODEFILE.js"></script>
+        <script src="js/survey.js"></script>
+
+        <script>
+            var myVersion = 'CODEFILE';
+            $(document).ready(function() { constructSurvey(); })
+        </script>
+
+	</body>
+</html>

@@ -1,0 +1,254 @@
+/*http://thecodeplayer.com/walkthrough/jquery-multi-step-form-with-progress-bar*/
+/*custom font*/
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Montserrat-Regular'), url('fonts/mont.woff2') format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+/*basic reset*/
+* { margin: 0; padding: 0; }
+
+html {
+	height: 100%;
+	/*Image only BG fallback*/
+	background: url('../assets/gs.png');
+	/*background = gradient + image pattern combo*/
+	background: linear-gradient(rgba(196, 102, 0, 0.2), rgba(155, 89, 182, 0.2)),
+	url('../assets/gs.png');
+
+	background-attachment:fixed;
+}
+
+body {
+	font-family: montserrat, arial, verdana;
+}
+
+/*form styles*/
+#msform {
+	width: 1200px;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+
+#msform fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+
+	/*stacking fieldsets above each other*/
+	position: absolute;
+}
+
+/*Hide all except first fieldset*/
+#msform fieldset:not(:first-of-type) {
+	display: none;
+}
+
+/*inputs*/
+#msform input, #msform textarea, #msform select {
+	padding: 15px;
+	border: 1px solid #CCCCCC;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 700px;
+	box-sizing: border-box;
+	font-family: montserrat;
+	color: #2C3E50;
+	font-size: 13px;
+	float: right;
+}
+
+/*buttons*/
+#msform .action-button {
+	width: 140px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+#msform .action-button:disabled {
+	background: #9AAEA8;
+	cursor: not-allowed;
+}
+
+#msform .action-button:hover, #msform .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666666;
+	margin-bottom: 20px;
+}
+
+/*progressbar*/
+#progressbar {
+	margin-bottom: 60px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 20%;
+	float: left;
+	position: relative;
+}
+
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+	background: #27AE60;
+	color: white;
+}
+
+label {
+	float: left;
+	padding-top: 15px;
+}
+
+.clear {
+	clear: both;
+	margin-bottom: 2px;
+}
+
+#basin {
+	list-style-type: none;
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	user-select: none;
+}
+
+#basin li {
+	display: inline-block;
+	vertical-align: top;
+	border: 1px solid #51D4E6;
+	background-color: #D4F4F8;
+	color: #51D4E6;
+	font-weight: bold;
+	margin: 5px;
+	padding: 20px;
+	width: 66px;
+	box-sizing: border-box;
+	cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABoAAAAcCAYAAAB/E6/TAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNiAoV2luZG93cykiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6RjdFRDk0NzMyMUJFMTFFNTgwODc5M0RDNjZCNTVERDUiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6RjdFRDk0NzQyMUJFMTFFNTgwODc5M0RDNjZCNTVERDUiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDpGN0VEOTQ3MTIxQkUxMUU1ODA4NzkzREM2NkI1NURENSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDpGN0VEOTQ3MjIxQkUxMUU1ODA4NzkzREM2NkI1NURENSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PlyKRkUAAAYrSURBVHjavFZraBRX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), auto;
+	-webkit-user-select: none; /* Chrome/Safari */
+	-moz-user-select: none; /* Firefox */
+	-ms-user-select: none; /* IE10+ */
+
+	/* Rules below not implemented in browsers yet */
+	user-select: none;
+}
+
+.basinerror {
+	border: 1px solid #E63E42 !important;
+	background-color: #E6CDCE !important;
+	color: #E63E42 !important;
+}
+
+.basinready {
+	border: 1px solid #5FE689 !important;
+	background-color: #CCFFCF !important;
+	color: #5FE689 !important;
+}
+
+.basinrendering {
+	border: 1px solid #E4E639 !important;
+	background-color: #FCFFB3 !important;
+	color: #E4E639 !important;
+}
+
+.eighty {
+	width: 80%;
+	float: left;
+}
+
+.twenty {
+	width: 20%;
+	float: right;
+}
+
+.indexSelect {
+	width: 141px !important;
+	height: 40px !important;
+	padding-left: 9px !important;
+	padding-top: 0 !important;
+	margin-right: 5px !important;
+	border: 5px solid rgb(39, 174, 96) !important;
+	padding-bottom: 0 !important;
+	border-right: 14px solid rgb(39, 174, 96) !important;
+	margin-top: 8px !important;
+	background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAC0AAAAeCAIAAAA3lgDOAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAACPSURBVFhH7ZI7DsAgDEN7m16LE3LF1oM7xBIQPgNUsd5GiJ8Q153TDoSHJTws4WEJD4vX4xmN7CnR8R5c3BPZUOFAD8D1vsjdOt3/lCWtyK0mx3oAVpUj8x5GPAALC5FhD+s9ZNLJoAdgrY3M+DnfA7D8i5x2MeUBqDAnAf7iAeYlwAKPJYSHJTwse3jk9AK/FGkYaBV2WwAAAABJRU5ErkJggg==') no-repeat right #fff !important;
+
+}
+
+.jsonerror
+{
+	border: 1px solid #E63E42 !important;
+	background-color: #E6CDCE !important;
+	color: #E63E42 !important;
+	font-weight: bold;
+	min-height: 20px;
+	padding: 5px;
+	width: 99% !important;
+	display: none;
+}

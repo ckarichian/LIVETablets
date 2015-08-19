@@ -1,0 +1,20 @@
+Session Number: 1426775989133  AutoSave: true
+Starting Websocket Server
+Websocket Server is now running on port 9125
+Express Server now running on port 9120
+Loaded new survey code: 1426775989133A
+
+undefined:1
+fdgsdfgdsfgsdfgsdfgsdfgsdfg
+ ^
+SyntaxError: Unexpected token d
+    at Object.parse (native)
+    at WebSocket.<anonymous> (/var/www/html/lib/ws.js:83:75)
+    at WebSocket.EventEmitter.emit (events.js:98:17)
+    at Receiver.ontext (/var/www/html/node_modules/ws/lib/WebSocket.js:798:10)
+    at /var/www/html/node_modules/ws/lib/Receiver.js:473:18
+    at /var/www/html/node_modules/ws/lib/Receiver.js:357:7
+    at /var/www/html/node_modules/ws/lib/PerMessageDeflate.js:217:5
+    at afterWrite (_stream_writable.js:274:3)
+    at onwrite (_stream_writable.js:266:7)
+    at WritableState.onwrite (_stream_writable.js:97:5)

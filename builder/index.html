@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Survey Code Generator</title>
+    <link href="./css/style.css" rel="stylesheet" type="text/css">
+    <link href="./css/jquery-ui.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="./wysiwyg/ui/trumbowyg.min.css">
+    <link rel="stylesheet" href="./css/font-awesome.css">
+</head>
+<body>
+
+<form id="msform">
+
+    <ul id="progressbar">
+        <li class="active">General Settings</li>
+        <li>Consent</li>
+        <li>Demographics</li>
+        <li>Survey Groups</li>
+        <li>Finished</li>
+    </ul>
+
+    <fieldset>
+        <h2 class="fs-title">General Settings</h2>
+        <h3 class="fs-subtitle">These are the basic variables of your survey</h3>
+
+        <label for="consentTitle">Survey Title:</label>
+        <input type="text" class="include" id="consentTitle" name="consentTitle" data-default="My Survey"
+               placeholder="Enter a Title for Your Survey" maxlength="50"/>
+
+        <div class="clear"></div>
+
+        <label for="verCode">Version Code:</label>
+        <input type="text" class="include" id="verCode" name="verCode" data-default="A"
+               placeholder="This is a short code to identify different versions of the survey" maxlength="5"
+               onkeypress="return ((event.charCode >= 48 && event.charCode <= 57) || (event.charCode >= 65 && event.charCode <= 90) || (event.charCode >= 97 && event.charCode <= 122))"/>
+
+        <div class="clear"></div>
+
+        <label for="waitText">Wait Text:</label>
+        <input type="text" class="include" id="waitText" name="waitText" data-default="null"
+               placeholder="OPTIONAL: The default wording to show participants while they wait"/>
+
+        <div class="clear"></div>
+
+        <label for="waitText">Next Question:</label>
+        <input type="text" class="include" id="nextQuestion" name="nextQuestion" data-default="null"
+               placeholder="OPTIONAL: The default wording betwen question groups"/>
+
+        <div class="clear"></div>
+
+        <label for="waitText">End Text:</label>
+        <input type="text" class="include" id="endText" name="endText" data-default="null"
+               placeholder="OPTIONAL: The default wording to show at the end of the study"/>
+
+        <div class="clear"></div>
+
+
+        <input type="button" name="next" class="next action-button" value="Next"/>
+    </fieldset>
+
+    <fieldset>
+        <h2 class="fs-title">Consent Settings</h2>
+        <h3 class="fs-subtitle">This sets and generates the consent portion of the study</h3>
+
+        <textarea class="include" id="consentContent" style="overflow: scroll; height:400px;" placeholder="Type in your consent information"></textarea>
+
+        <div class="clear"></div>
+
+        <label for="consentSignature">Require a Signature:</label>
+        <select id="consentSignature" class="include" name="consentSignature">
+            <option value="true">Yes</option>
+            <option value="false">No</option>
+        </select>
+
+        <div class="clear"></div>
+
+        <div id="nestedQuestionsWell" class="well" style="display: none; margin-top: 40px">
+            <b>Nested Consent Questions</b><br><br>
+
+            <table class="table">
+                <thead>
+                <tr>
+                <th width="20%">Code</th>
+                <th>Question</th>
+                <th width="2%">Delete</th>
+                </tr>
+                </thead>
+                <tbody id="nestedQuestionsHolder">
+                </tbody>
+            </table>
+
+        </div>
+
+
+        <input type="button" name="next"  id="proceedToDemographics" class="next action-button" value="Next"/>
+        <input type="button" name="next"  class="previous action-button" value="Back"/>
+        <button type="button" class="action-button" onClick="addNestedConsent(); this.blur();" style="width: 180px">
+            Add Nested Consent
+        </button>
+    </fieldset>
+
+
+    <fieldset>
+        <h2 class="fs-title">Demographic Settings</h2>
+
+        <h3 class="fs-subtitle">This sets and generates the demographic portion of the study</h3>
+
+        <div class="groupbox demographicGroup">
+            <ul class="sortable">
+
+
+            </ul>
+            <input type="button" name="next" class="action-button" value="Add" onClick="addQuestion(this)"
+                   style="width: 50px"/>
+        </div>
+        <div class="clear"></div>
+
+        <input type="button" name="next" class="next action-button" value="Next"/>
+        <input type="button" name="next" class="previous action-button" value="Back"/>
+    </fieldset>
+
+    <fieldset>
+        <h2 class="fs-title">Question Groups</h2>
+
+        <h3 class="fs-subtitle">These are the questions by page that a user will see on the survey</h3>
+
+        <div id="questionGroupWell"></div>
+
+
+      <!--
+
+        <div class="groupbox questionGroup">
+            <ul class="sortable">
+
+            </ul>
+            <input type="button" name="next" class="action-button" value="Add" onClick="addQuestion(this)"
+                   style="width: 50px"/>
+        </div>
+        -->
+
+
+
+
+
+
+
+        <div class="clear"></div>
+        <input type="button" name="next" class="finish next action-button" value="Next"/>
+        <input type="button" name="next" class="previous action-button" value="Back"/>
+        <input type="button" class="action-button" value="Add QuestionGroup" onclick="addQuestionGroup()"/>
+    </fieldset>
+
+    <fieldset>
+        <h2 class="fs-title">Your Code</h2>
+
+        <h3 class="fs-subtitle">Here is your resulting manifest. Be sure to download a copy in a safe location.</h3>
+
+        <textarea name="yourCode" id="yourCode" rows="7" style="width: 95%; float: none"></textarea>
+
+        <div class="clear"></div>
+        <input type="button" name="next" class="previous action-button" value="Back"/>
+        <input type="button" name="next" class="action-button" onclick="postToAdmin()" value="Run in Admin"/>
+        <input type="button" name="next" class="action-button" onclick="saveTextAsFile()" value="Download"/>
+        <input type="button" name="next" class="action-button" onclick="jsonEditor()" value="JSONEditor"/>
+
+    </fieldset>
+
+</form>
+
+<div class="shade">
+    <div class="window">
+
+        <div id="accordion">        </div>
+
+    </div>
+</div>
+
+
+<script src="js/jquery-2.1.3.min.js"></script>
+<script src="js/jquery-ui.min.js"></script>
+<script src="js/generator.js"></script>
+<script src="js/frames.js"></script>
+<script src="wysiwyg/trumbowyg.min.js"></script>
+
+
+
+
+
+</body>
+</html>

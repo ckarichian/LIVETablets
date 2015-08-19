@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tablet Survey Admin Console</title>
+
+    <link rel="stylesheet" href="../css/adminstyle.css" type="text/css"/>
+    <script src="../js/adminlib.js"></script>
+    <script src="../js/adminjs.js"></script>
+
+    <style>
+        #progressbar li
+        {
+            width: 50%;
+        }
+
+        td
+        {
+            font-size: 80%;
+        }
+
+        .action-button {
+            width: 160px !important;
+        }
+    </style>
+</head>
+<body>
+<!-- multistep form -->
+<form id="msform">
+    <!-- progressbar -->
+    <ul id="progressbar">
+        <li class="active">Main Panel</li>
+        <li>Settings</li>
+    </ul>
+    <!-- fieldsets -->
+    <fieldset>
+        <h2 class="fs-title">Tablet Console Panel</h2>
+
+        <h3 class="fs-subtitle">Select a command below:</h3>
+
+        <table style="width:100%">
+            <tr>
+                <td> <input type="button" name="openconsole" class="action-button" value="Open Console" onclick="window.location.href = 'admin.html';"/></td>
+                <td>Opens the admin console to launch a survey</td>
+            </tr>
+            <tr>
+                <td><input type="button" name="openhelp" class="action-button" value="Open Documentation" onclick="window.location.href = '../help/index.html';"/></td>
+                <td>Read the documentation on the tablet software</td>
+            </tr>
+            <tr>
+                <td><input type="button" name="openbuilder" class="action-button" value="Open Builder" onclick="window.location.href = '../builder/index.html';"/></td>
+                <td>Opens the builder application to generate surveys</td>
+            </tr>
+            <tr>
+                <td><input type="button" name="ajax" class="action-button" value="Set Routes" onclick="slide.next()"/></td>
+                <td>Used to direct the tablets to an external source</td>
+            </tr>
+        </table>
+
+        <br><br>
+        <div class="clear"></div>
+
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Set Routes</h2>
+
+        <h3 class="fs-subtitle">Set the destinations of the tablets depending on their source DNS. Read documentation carefully.</h3>
+
+        <label for="svExternal">External Host IP:</label>
+        <input type="text" id="svExternal" name="svExternal" value="130.113.48.169" />
+
+        <div class="clear"></div>
+
+        <label for="svInternal">Internal Host IP:</label>
+        <input type="text" id="svInternal" name="svInternal" value="192.168.25.16" />
+
+        <div class="clear"></div>
+
+        <label for="svRoute">New Route:</label>
+        <input type="text" id="svRoute" name="svRoute" value="http://tablets.livepeople.ca:9120/list"/>
+
+        <div class="clear"></div>
+        <input type="button" name="prev" class="action-button" value="Cancel" style="background: #FF4C4C;" onclick="slide.prev()"/>
+        <input type="button" name="prev" class="saveajax action-button" value="Save"/>
+
+    </fieldset>
+</form>
+
+</body>
+</html>

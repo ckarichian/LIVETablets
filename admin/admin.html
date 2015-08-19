@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Tablet Survey Admin Console</title>
+
+    <link rel="stylesheet" href="../css/adminstyle.css" type="text/css"/>
+    <script src="../js/adminlib.js"></script>
+    <script src="../js/adminjs.js"></script>
+    <script src="../js/modules.js"></script>
+</head>
+<body>
+<!-- multistep form -->
+<form id="msform">
+    <!-- progressbar -->
+    <ul id="progressbar">
+        <li class="active">Set Settings</li>
+        <li>Load Questions</li>
+        <li>Build Tables</li>
+        <li>Run Survey</li>
+        <li>Finished</li>
+    </ul>
+    <!-- fieldsets -->
+    <fieldset>
+        <h2 class="fs-title">Set Settings</h2>
+
+        <h3 class="fs-subtitle">These are the basic variables of your survey</h3>
+
+        <label for="svSession">Session Name:</label>
+        <input type="text" id="svSession" name="svSession" disabled/>
+
+        <div class="clear"></div>
+
+        <label for="adebug">Debug:</label>
+        <select id="adebug" name="adebug">
+            <option value="-debug">Yes</option>
+            <option value="-nodebug">No</option>
+        </select>
+
+        <div class="clear"></div>
+
+        <input type="button" name="next" class="action-button newSession" value="Open Console"/>
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Question Code</h2>
+        <div class="clear"></div>
+        <h3 class="fs-subtitle">Input the code for your survey into the box below.</h3>
+        <div id="jsonerror" class="jsonerror"></div>
+        <div class="clear"></div>
+        <textarea name="surveyCode" id="surveyCode" style="width: 100% !important; min-height: 400px;"><?php if(isset($_POST['fill'])) { echo $_POST['fill']; } ?></textarea>
+
+        <div class="clear"></div>
+        <input type="button" name="next" class="waitforws savenew action-button" value="Done" data-value="next" disabled/>
+        <input type="button" name="addnew" class="waitforws savenew action-button" value="Save & Another" disabled/>
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Build Database Tables</h2>
+
+        <h3 class="fs-subtitle">We will now attempt to build the tables in the database for your survey</h3>
+        <input type="button" name="next" class="build action-button" value="Build"/>
+        <input type="button" class="action-button" value="< Back" onclick="slide.prev()" />
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Manage Survey</h2>
+
+        <h3 class="fs-subtitle">Your survey is now ready to run. You may now start booting up the tablets and begin the
+            consent process </h3>
+
+
+        <div class="eighty">
+            <ul id="basin"></ul>
+        </div>
+        <div class="twenty"><input type="button" name="next" class="wsnext action-button" value="Next &gt;"/><br><br>
+
+        <select class="indexSelect" id="indexSelect">
+            </select>
+
+            <br><br><input type="button" name="prev" class="wsprev action-button" value="&lt; Previous"/><br><br><input type="button" name="blank" class="wsblank action-button" value="Blank Screens"/></div>
+
+
+        <div class="clear"></div>
+
+
+        <input type="button" name="next" class="finished action-button" value="Finished"/>
+    </fieldset>
+    <fieldset>
+        <h2 class="fs-title">Finished</h2>
+
+        <h3 class="fs-subtitle">The survey is now closed. Please click the links below to collect your data:</h3>
+        <input type="button" class="download action-button" data-dl="node" value="NodeJS Log"/>
+        <input type="button" class="download action-button" data-dl="csv" value="CSV Data"/>
+        <input type="button" class="download action-button" data-dl="xml" value="XML Data"/>
+        <input type="button" class="download action-button" data-dl="sql" value="SQL Dump"/>
+
+    </fieldset>
+</form>
+
+</body>
+</html>

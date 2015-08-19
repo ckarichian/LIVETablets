@@ -1,0 +1,300 @@
+/*http://thecodeplayer.com/walkthrough/jquery-multi-step-form-with-progress-bar*/
+@font-face {
+	font-family: 'Montserrat';
+	font-style: normal;
+	font-weight: 400;
+	src: local('Montserrat-Regular'), url('./fonts/mont.woff2') format('woff2');
+	unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2212, U+2215, U+E0FF, U+EFFD, U+F000;
+}
+
+/*basic reset*/
+* { margin: 0; padding: 0; }
+
+html {
+	height: 100%;
+	background: linear-gradient(rgba(115, 255, 255, 0.2), rgba(0, 127, 255, 0.2)),
+	url('./gs.png');
+	background-attachment:fixed;
+}
+
+body {
+	font-family: Montserrat, sans-serif;
+	overflow-x: hidden;
+}
+
+/*form styles*/
+#msform {
+	width: 1200px;
+	margin: 50px auto;
+	text-align: center;
+	position: relative;
+}
+
+fieldset {
+	background: white;
+	border: 0 none;
+	border-radius: 3px;
+	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
+	padding: 20px 30px;
+	box-sizing: border-box;
+	width: 80%;
+	margin: 0 10%;
+	position: absolute;
+}
+
+/*Hide all except first fieldset*/
+fieldset:not(:first-of-type) {
+	display: none;
+}
+
+/*inputs*/
+input, textarea, select, button {
+	padding: 15px;
+	border: 1px solid #CCCCCC;
+	border-radius: 3px;
+	margin-bottom: 10px;
+	width: 100%;
+	box-sizing: border-box;
+	font-family: Montserrat, sans-serif;
+	color: #2C3E50;
+	font-size: 13px;
+	float: right;
+	max-width: 700px;
+}
+
+
+table input {
+	width: 100% !important;
+}
+
+/*buttons*/
+.action-button {
+	width: 140px;
+	background: #27AE60;
+	font-weight: bold;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.action-button:hover, .action-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #27AE60;
+}
+
+.delete-button {
+	width: 40px;
+	background: #FF4C4C;
+	color: white;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.delete-button:hover, .delete-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #FF0000;
+}
+
+
+.toggle-button {
+	width: 40px;
+	background: #E6CDCE;
+	color: #E63E42;
+	border: 0 none;
+	border-radius: 1px;
+	cursor: pointer;
+	padding: 10px 5px;
+	margin: 10px 5px;
+}
+
+.toggle-button:hover, .toggle-button:focus {
+	box-shadow: 0 0 0 2px white, 0 0 0 3px #E63E42;
+}
+
+
+
+
+/*headings*/
+.fs-title {
+	font-size: 15px;
+	text-transform: uppercase;
+	color: #2C3E50;
+	margin-bottom: 10px;
+}
+
+.fs-subtitle {
+	font-weight: normal;
+	font-size: 13px;
+	color: #666666;
+	margin-bottom: 20px;
+}
+
+/*progressbar*/
+#progressbar {
+	margin-bottom: 60px;
+	overflow: hidden;
+	/*CSS counters to number the steps*/
+	counter-reset: step;
+}
+
+#progressbar li {
+	list-style-type: none;
+	color: white;
+	text-transform: uppercase;
+	font-size: 9px;
+	width: 20%;
+	float: left;
+	position: relative;
+}
+
+#progressbar li:before {
+	content: counter(step);
+	counter-increment: step;
+	width: 20px;
+	line-height: 20px;
+	display: block;
+	font-size: 10px;
+	color: #333333;
+	background: white;
+	border-radius: 3px;
+	margin: 0 auto 5px auto;
+}
+
+/*progressbar connectors*/
+#progressbar li:after {
+	content: '';
+	width: 100%;
+	height: 2px;
+	background: white;
+	position: absolute;
+	left: -50%;
+	top: 9px;
+	z-index: -1; /*put it behind the numbers*/
+}
+
+#progressbar li:first-child:after {
+	/*connector not needed before the first step*/
+	content: none;
+}
+
+/*marking active/completed steps green*/
+/*The number of the step and the connector before it = green*/
+#progressbar li.active:before, #progressbar li.active:after {
+	background: #27AE60;
+	color: white;
+}
+
+label {
+	float: left;
+	padding-top: 15px;
+}
+
+.clear {
+	clear: both;
+	margin-bottom: 2px;
+}
+
+.groupbox {
+	width: 75%;
+	background: white;
+	border: 1px solid #BED2E1;
+	border-radius: 3px;
+	padding: 20px 30px;
+	margin-left: auto;
+	margin-right: auto;
+	margin-bottom: 60px;
+	box-sizing: border-box;
+}
+
+.sortable { list-style-type: none; margin: 0; padding: 0; width: 100%; }
+
+.sortable li { margin: 0 3px 3px 3px; padding-left: 1.5em; cursor: pointer; }
+
+.sortable li > i { display: none; }
+
+.shade {
+	height: 100vh;
+	width: 100vw;
+	background: linear-gradient(rgba(100, 100, 100, 0.6), rgba(150, 150, 150, 0.6)),
+	url('./hash.png');
+	position: absolute;
+	top: 0;
+	left: 0;
+	z-index: 1000;
+	display: none;
+}
+
+.shade > .window {
+	background: white;
+	height: 60vh;
+	position: absolute;
+	top: 10vh;
+	left: 26vw;
+	width: 48vw;
+	overflow-y: scroll;
+	overflow-x: hidden;
+	z-index: 1001;
+	border: 2px solid rgb(134, 134, 134);
+	box-shadow : 13px 13px 6px rgba(50, 50, 50, 0.7);
+	padding: 0;
+}
+
+.accordion-toggle {
+	cursor: pointer;
+	border: 1px solid #C5DBEC;
+	background: #DFEFFC;
+	padding: 0.5rem;
+}
+
+.accordion-content { display: none; padding: 16px; }
+
+.accordion-content.default { display: block; }
+
+.questionLiBlock
+{
+	width: 100%;
+	border: 1px solid #c5dbec;
+	font-weight: bold;
+	color: #2e6e9e;
+	padding: 10px;
+	background: #dfeffc;
+}
+
+li > .properties
+{
+	width: 100%;
+	border: 1px solid #c5dbec;
+	border-top: 0 !important;
+	color: #002944;
+	padding: 10px;
+	background: #FCFCFC;
+	margin-top: 0;
+	display: none;
+	margin-bottom: 10px;
+}
+
+.questionLiBlock > i
+{
+	float:right;
+}
+
+.properties > input
+{
+	float: none !important;
+	width: 100% !important;
+}
+
+.center {
+	width: 100%;
+	text-align: center;
+}
+
+.sortable:empty
+{
+	border: 1px dotted rgba(190, 210, 225, 0.7);
+	min-height: 50px;
+}

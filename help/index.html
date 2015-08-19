@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>LIVESurvey - Documentation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- styles -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="css/bootstrap-doc.css" rel="stylesheet">
+    <link href="css/google-code-prettify/prettify.css" rel="stylesheet">
+
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <![endif]-->
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/google-code-prettify/prettify.js"></script>
+</head>
+
+<body>
+<header>
+
+    <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="index.html">Tablet Documentation</a>
+            </div>
+        </div>
+    </div>
+
+</header>
+
+
+<article class="container">
+    <div class="row-fluid">
+        <div class="span3">
+            <!--sidebar -->
+            <ul class="nav nav-tabs nav-stacked">
+
+
+            </ul>
+
+        </div>
+
+
+        <div class="span9">
+
+            <div class="doc-content-box">
+
+                <!--Introduction-->
+                <div id="introduction">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Introduction</h2>
+                    </div>
+
+                    <p>One of the unique technologies of the McMaster LIVELab is the ability to collect responses from
+                        the audience members using
+                        individual Android tablets in collaboration with CoBALT Connects. However, there was no such software that was affordable, offered
+                        complete customization, and could be synchronized
+                        with the existing systems. This lead to the creation of the LIVESurvey Software.<br><br>
+
+                        The software is based on Javascript which was chosen because it was widely documented; could run
+                        on both the server end, as well, as the tablet end thus saving
+                        future programmers from learning multiple languages; offered flexibility; and was fast. <br><br>
+
+                        The primary goal of the software was to provide a unified system where researchers could send,
+                        on command, specific questions to participants, and collect the data back easily.
+                        Due to the complex nature of research, it is difficult to create a system that will satisfy the
+                        needs of every type of possible research; however, we are confident
+                        that the system as is will be a great resource for the majority of research that will occur, and
+                        allows for customization for the remainder.<br><br>
+
+                        A reminder that many typical survey features are not implented in this application. The purpose
+                        is to have many people receive the same question at the same time. Therefore, if
+                        certain features do not exist, that means it conflicts with the main purpose of the
+                        applications. Furthermore, the tablets used are consumer level products (not research grade) and you must have that in cosideration when planning timing and reliability. .<br>
+
+                    </p>
+
+                    <div class="page-header">
+                        <h4>Versions</h4>
+                    </div>
+
+                    <p>The following versions of supporting software are used. It is very important to note that using
+                        newer or older versions of any software can lead to unanticipated
+                        effects and is NOT RECOMMENDED</p>
+
+                    <ul>
+                        <li>NodeJS v 0.12.4</li>
+                        <li>Node Express Plugin v 4.12.3</li>
+                        <li>Node MySql Plugin v 2.5.5</li>
+                        <li>Node ws Plugin v 0.7.1</li>
+                        <li>Android Lollipop v5.1.1</li>
+                        <li>Google Chrome 42 **</li>
+                    </ul>
+
+                    <small>** Note, Chrome is now "WebView" on android and is updated as it's own app. It is not
+                        recommend to update apps on the device without ensuring compatibility. Chrome is also
+                        recommended to ensure fewer errors on the admin and builder applications on the desktop
+                    </small><br><br>
+
+                    <p><b>Only use the latest version of Chrome when running the admin, documentation, or builder app.</b> Otherwise, unexpected errors may occur due to different browser versions.</p>
+
+                    <div class="page-header">
+                        <h4>File Structure</h4>
+                    </div>
+
+                    <ul style="padding-left:50px;">
+                        <li class="folder-icon">/admin
+                            <ul>
+                                <li class="script-icon">admin.html - <i>sends the survey to the server</i></li>
+                                <li class="other-icons">dl.php - <i>retrieved files after survey end</i></li>
+                                <li class="other-icons">exec.php - <i>runs the console with a php shell</i></li>
+                                <li class="script-icon">index.html - <i>admin console for the system</i></li>
+                        </li>
+                    </ul>
+                    </li>
+                    <li class="folder-icon">/assets
+                        <ul>
+                            <li class="other-icons">app-release.apk - <i>android file for kiosk app</i></li>
+                            <li class="other-icons">gs.png - <i>common background image</i></li>
+                            <li class="other-icons">owner.apk - <i>application for provisioning other tablets</i>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="folder-icon">/css
+                        <ul>
+                            <li class="folder-icon">/fonts - <i>fonts used in the application</i></li>
+                            <li class="script-icon">adminstyle.css - <i>the style sheets for the admin app</i></li>
+                            <li class="script-icon">style.css - <i>the style sheets for the survey app</i></li>
+                        </ul>
+                    </li>
+                    <li class="folder-icon">/help - <i>this documentation</i></li>
+                    <li class="folder-icon">/js
+                        <ul>
+                            <li class="script-icon">adminjs.js - <i>scripting for the admin panel</i></li>
+                            <li class="script-icon">adminlib.js - <i>libraries for the admin panel</i></li>
+                            <li class="script-icon">express.js - <i>script for the file server</i></li>
+                            <li class="script-icon">libraries.js - <i>libraries for the survey app</i></li>
+                            <li class="script-icon">modules.js - <i>location of the dataTypes variable</i></li>
+                            <li class="script-icon">survey.js - <i>all the logic for the survey presentation</i>
+                            </li>
+                            <li class="script-icon">ws.js - <i>all the server scripting for the tablets</i></li>
+                        </ul>
+                    </li>
+                    <li class="folder-icon">/logs - <i>the save location of the nodejs console logs</i></li>
+                    <li class="folder-icon">/node_modules - <i>the external libraries for nodejs</i></li>
+                    <li class="script-icon">index.html - <i>the root file</i></li>
+                    <li class="script-icon">server.js - <i>the server application</i></li>
+                    <li class="script-icon">tablet.html - <i>the basic layout template</i></li>
+                    </ul>
+
+
+                    <div class="page-header">
+                        <h4>Author</h4>
+                    </div>
+
+                    <p>Carl Karichian, Last Updated <span class="authordate"></span>.</p>
+
+                    <div class="page-header">
+                        <h4>Disclaimer</h4>
+                    </div>
+
+                    <p>At the time of writing, the software is deemed to be sufficiently complete to allow for research
+                        to begin; however, you should always test your experiment thoroughly
+                        before running participants to manage potential bugs. We will not be responsible for any loss of
+                        data during experimentation as the software is still experimental. No
+                        warranty or compensation will be provided.</p>
+
+
+                    <br><br><br>
+                </div>
+                <!--END Introduction-->
+
+                <!--Survey Manifest-->
+                <div id="survey_manifest">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Survey Manifest</h2>
+                    </div>
+
+                    <p>At the very heart of every survey is a manifest file. It is a file that tells the survey software
+                        what to display, how to display it, and so on. The manifest
+                        is simply a JSON (<a href="http://www.w3schools.com/json/" target="_blank">tutorial one</a>, <a
+                                href="http://json.org/" target="_blank">tutorial two</a>) file with a series
+                        of predefined properties and objects. You may use many different free online tools
+                        (<a href="https://www.jsoneditoronline.org/" target="_blank">JSON Editor</a>) to help you
+                        write a JSON manifest, or you may use the included builder app, or you may use any text-based
+                        editor such as Notepad. Any error in the syntax of the manifest will lead to critical
+                        errors in the deployment of the survey. The purpose of this guide is to assist with how to
+                        use the software, not a guide on an introduction to programming. It is expected that
+                        users reading beyond here have some programming experience.<br><br>
+
+                        A complete manifest file will include the following properties:<br>
+                    </p>
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Property Details</h4>
+                        </div>
+                        <p class="lead class-name">title <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>The title of the survey being presented. May include HTML.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"title" : "My Tablet Experiment"</pre>
+
+                        <p class="lead class-name">version <i class="pull-right options">Optional | String</i>
+                        </p>
+
+                        <p>A unique identifier for the version of the survey. Use characters a-z and numbers ONLY (no
+                            spaces). More
+                            details on versioning are available in the <a href="#multiple_versions">Multiple
+                                Versions</a>
+                            section.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"version" : "EEG"</pre>
+
+                        <p class="lead class-name">language <i class="pull-right options">Optional | Object</i>
+                        </p>
+
+                        <p>If you wish to change the wordings of any default language used, you must add the
+                            <i>language</i> property to the manifest. Within that object, you then add sub-properties
+                            for each wording you wish to change. All are optional, and if you only wish to change
+                            certain wordings, you only need to include those properties and omit the rest.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"language" : {
+    "waitText" : "Please wait for the experiment to begin", //Appears after one completes their consent
+    "nextQuestion" : "Please wait for the next question to begin", //Appears during wait screens
+    "endText" : "You have reached the end of the experiment", //Appears at the end of the study
+    "readyUp" : "Click When Ready", //The text of the ready button when they have not yet clicked it
+    "readyDn" : "You're Ready", //The text of the button after clicking
+    }</pre>
+
+
+                        <p class="lead class-name">consent <i class="pull-right options">Required | Object</i>
+                        </p>
+
+                        <p>This object and it's sub-properties define and build the consent form. <br><br>
+
+                            The consent module offers the ability to create a page to present your consent form. The
+                            wordings
+                            of which must be approved by the institutional REB. Carefully following their guidelines
+                            is critical. In addition, you have the option of adding nested consent questions whereby
+                            you can asked additional consent questions. This will automatically add yes/no questions
+                            to the bottom of the consent form. Finally, you can give participants the ability to sign
+                            the tablet with their finger. This is purely an <b>entertainment</b> feature and the
+                            signatures do not get saved to the database.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"consent" : {
+    //signature - required | boolean - defines whether the ability to provide a signature will be enabled
+    //note: the signature is for entertainment purposes only, and is not saved to the database
+    "signature" : true,
+
+    //body - required | string - is the content of the consent information and can accept HTML. Be careful to
+    //escape the (") character as below
+    "body": "&lt;b&gt;Purpose of the Study:&lt;/b&gt;  We are looking to define \"vibrancy\".",
+
+    //nestedConsent - optional | object + questions array - defines the nested consent questions of a consent form.
+    "nestedConsent" : {
+        "questions":
+        [
+            /*
+            each question must be added as follows. The code is a unique identifier for the
+            question, and the question property is the text of the question to display. Be
+            careful and make sure you use the proper notation for arrays within an object
+            as below. If you do not wish to have any nested consent questions, omit the
+            nestedConsent property all together. Data will be saved using column
+            names 'question_c_CODE'.
+            */
+
+            {"code": "VIDEO", "question": "Do you consent to be videotaped?", "type":"nest"},
+            {"code": "AUDIO", "question": "Do you consent to be audiotaped?", "type":"nest"}
+        ]
+    }
+}</pre>
+
+                        <p class="lead class-name">demographics <i class="pull-right options">Required | Object</i>
+                        </p>
+
+                        <p>The presence of this object creates a single page after the participant has consented. Omit
+                            this property if you do not wish to have a demographics page.<br><br>
+
+                            You may use any logical question type on this page, and, you can have as many as required.
+                            Demographics is defined as an object with a property <i>questions</i> that contains an array
+                            of question objects. For details on how to write a question object, refer to <a
+                                    href="#adding_questions">Adding Questions</a> section. After this page, a wait
+                            screen will appear when the participant clicks "Ready".
+                        </p>
+
+        <pre class="prettyprint linenums">
+"demographics" : {
+    "questions" : [
+
+            /* Question Code Goes Here */
+
+                  ]
+    }</pre>
+                        <p class="lead class-name">questionGroups <i class="pull-right options">Required | Array</i>
+                        </p>
+
+                        <p>The questionGroups property defines all the pages that you will show questions on.
+                            It contains one or more questionGroup objects which have a few set properties (defined
+                            below). <br><br>
+
+                            Each questionGroup can be considered a slide in a powerpoint, and the properties within
+                            each of these objects determines what is displayed. Moving between
+                            questionGroups is like moving between slides on your PPT.<br><br>
+
+                            Each questionGroup must have some additional properties defined: waitNext, showReady, and
+                            questions. For details on how to write a question object, refer to
+                            <a href="#adding_questions">Adding Questions</a> section.
+                        </p>
+
+        <pre class="prettyprint linenums">
+/* You only provide a single "questionGroups" property for your manifest. Each slide will be
+   an object within that array */
+"questionGroups" : [{
+
+    /* Required - Boolean - Determines if after this question is shown, the next slide will
+       be a holding/wait screen */
+
+    "waitNext" : true,
+
+    /* Required - Boolean - Determines if the Ready button should be displayed at the
+       end of the slide */
+
+    "showReady" : true,
+
+    /* Optional - String - Only add this line to the questionGroup if you want to hide the
+        the divider lines from appearing */
+
+    "noLines" : 'none',
+
+    /* Required - Array - Is a subproperty that contains all the question objects to be displayed
+       on that particular slide. Each question is coded as an object as described in the "Adding
+       Questions" section */
+
+    "questions" : [
+
+            /* Question Code Goes Here */
+
+                  ]
+    ]}</pre>
+
+                    </div>
+                </div>
+                <!--END Survey Manifest-->
+
+                <!--Adding Questions-->
+                <div id="adding_questions">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Adding Questions</h2>
+                    </div>
+
+                    <p>Within each question array within your manifest, you then add entries within it that represent
+                        your questions. The structure for each question type is enforced, but the values within them may
+                        change depending on the question type required. Please refer to the Question Types section for
+                        more details.
+                    </p>
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Properties</h4>
+                        </div>
+
+                        <p class="lead class-name">code <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>This subproperty creates an identifier for this particular question. It should be a short
+                            string WITHOUT SPACES OR SPECIAL CHARACTERS (underscore allowed). The column in the database
+                            will be labeled as 'question_[[Index of questionGroup]]_[[CODE]]'
+                        </p>
+
+        <pre class="prettyprint linenums">
+"code" : "cake_pref"</pre>
+
+                        <p class="lead class-name">title <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>This is the text that will appear over the question. It is required, but you can leave the
+                            value as a couple of spaces if you wish to omit any text.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"title" : "What is your favorite cake?" </pre>
+
+
+                        <p class="lead class-name">hint <i class="pull-right options">Optional | String</i>
+                        </p>
+
+                        <p>Smaller text printed under the question title/text. May be used for a hint or extra
+                            information.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"hint" : "Hint: The answer may fool you"</pre>
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Specifies the type of question this is. Please refer to the "Question Types" section for more
+                            information.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "checkbox"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Varies | Varies</i>
+                        </p>
+
+                        <p>This property may or may not be required depending on the question type. Carefully review
+                            what to enter here and how to enter it in the documentation for each Question Type.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"options" : [
+       {"code":"chocolate", "value":"Chocolate Cake"},
+       {"code":"vanilla", "value":"Vanilla Cake"},
+       {"code":"cheesecake", "value":"Cheesecake"}
+    ]</pre>
+
+                    </div>
+
+
+                </div>
+                <!--END Adding Questions-->
+
+
+                <!--Question Types-->
+                <div id="question_types">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Question Types</h2>
+                    </div>
+
+                    <p>The bulk of your manifest file is the actual questions that you will be asking participants
+                        during your experiment. There are a number of built-in question types as part of the
+                        survey package. Each one follows a similar pattern of properties in your manifest and
+                        are detailed below:<br><br>
+                    </p>
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Radio Questions (Multiple Choice)</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <input name="radios" type="radio"> Option A <br/>
+                                <input name="radios" type="radio"> Option B <br/>
+                                <input name="radios" type="radio"> Option C <br/>
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Radio questions present a question title, a hint (optional), and a list of potential options
+                            for participants to select from. The vector rendered is a large grey circle that fills with
+                            a smaller circle when selected. Only one answer can be selected. Choosing a different
+                            answer will clear the ready status if set. Moving backwards recalls the saved answer.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "radio"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Required | Array</i>
+                        </p>
+
+                        <p>The options for this question type MUST consist of an array type, even if there is only
+                            one option. Recall from your JSON tutorial that arrays are defined as [a,b,c]. Each
+                            item in the array of options should be an object that has two properties: (1) <i>code</i>
+                            which represents the saved value of the question (i.e., what will appear in the database),
+                            and (2) <i>value</i> which is what will appear on the screen for the user, but not
+                            the database. You would want the value to be human readable, but the "code" can be coded.
+                            See the example below:
+                        </p>
+
+        <pre class="prettyprint linenums">
+"options" : [
+        {"code":"long", "value":"I like LONG walks on the beach"},
+        {"code":"short", "value":"I like SHORT walks on the beach"},
+        {"code":"none", "value":"I hate the beach"}
+    ]</pre>
+                    </div>
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Radio Questions (Multiple Choice) - Timed</h4>
+                        </div>
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>This is a special question type that duplicates a regular radio question; however, it
+                            also
+                            times how long it took the participant to select an answer. The time reported will be
+                            the total time in milliseconds between the question appearing and the time that
+                            the last answer was chosen. Moving backwards DOES NOT recall the saved answer, but
+                            will append the new answer in the database.
+                        </p>
+
+                        <p>The value in the database will be "RESPONSE in TIME" where time is in ms</p>
+
+        <pre class="prettyprint linenums">
+"type" : "timedRadio"</pre>
+
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Text Input</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <input name="text" type="text" size="30" value="Here is some text">
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Text questions present a question title, a hint (optional), and a small box to enter text.
+                            When users tap on the box, it will open the android keyboard for user input. The maximum
+                            length that will be saved is 255 characters. Touching the box will fire clearReady(). Moving
+                            backwards recalls the saved answer.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "text"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Ignored</i>
+                        </p>
+
+                        <p>Text does not accept any options
+                        </p>
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Bigtext Input</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <textarea rows="4" style="width:70%">Blah blah blah</textarea>
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Text questions present a question title, a hint (optional), and a large box to enter text.
+                            When users tap on the box, it will open the android keyboard for user input. The maximum
+                            length that will be saved is 10,000 characters. Touching the box will fire clearReady().
+                            Moving backwards recalls the saved answer.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "bigtext"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Required | Integer</i>
+                        </p>
+
+                        <p>The number of rows to display in the bigtext box. The value may be entered as an integer,
+                            or string, but integer is recommended.
+                        </p>
+    <pre class="prettyprint linenums">
+"options" : 4</pre>
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Drop-down List</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <select>
+                                    <option selected disabled>Please Select an Answer</option>
+                                    <option>Option One</option>
+                                    <option>Option Two</option>
+                                    <option>Option Three</option>
+                                </select>
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Dropdown questions present a question title, a hint (optional), and a drop down list of
+                            potential options for participants to select from. Only one answer can be selected.
+                            Choosing a different answer will fire <i>clearReady()</i>. Moving backwards recalls the
+                            saved answer.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "dropdown"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Required | Array</i>
+                        </p>
+
+                        <p>The options for this question type MUST consist of an array type, even if there is only
+                            one option. Recall from your JSON tutorial that arrays are defined as [a,b,c]. Each
+                            item in the array of options should be an object that has two properties: (1) <i>code</i>
+                            which represents the saved value of the question (i.e., what will appear in the database
+                            column), and (2) <i>value</i> which is what will appear on the screen for the user, but not
+                            the database. You would want the value to be human readable, but the "code" can be coded.
+                            See the example below:
+                        </p>
+
+        <pre class="prettyprint linenums">
+"options" : [
+            {"code":"long", "value":"I like LONG walks on the beach"},
+            {"code":"short", "value":"I like SHORT walks on the beach"},
+            {"code":"none", "value":"I hate the beach"}
+        ]</pre>
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Checkbox (Multiple Choice)</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <input name="checkbox" type="checkbox"> Option A <br/>
+                                <input name="checkbox" type="checkbox"> Option B <br/>
+                                <input name="checkbox" type="checkbox"> Option C <br/>
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Checkbox questions present a question title, a hint (optional), and a list of potential
+                            options
+                            for participants to select from. The vector rendered is a large grey rectangle that fills
+                            with
+                            a check when selected. As many answers as desired can be selected. Choosing a different
+                            answer will clear the ready status if set. Moving backwards recalls the saved answers.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "checkbox"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Required | Array</i>
+                        </p>
+
+                        <p>The options for this question type MUST consist of an array type, even if there is only
+                            one option. Recall from your JSON tutorial that arrays are defined as [a,b,c]. Each
+                            item in the array of options should be an object that has two properties: (1) <i>code</i>
+                            which represents the saved value of the question (i.e., what will appear in the database
+                            column), and (2) <i>value</i> which is what will appear on the screen for the user, but not
+                            the database. You would want the value to be human readable, but the "code" can be coded.
+                            See the example below:
+                        </p>
+
+        <pre class="prettyprint linenums">
+"options" : [
+            {"code":"long", "value":"I like LONG walks on the beach"},
+            {"code":"short", "value":"I like SHORT walks on the beach"},
+            {"code":"none", "value":"I hate the beach"}
+        ]</pre>
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Yes/No Question</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <table border="0">
+                                    <tr>
+                                        <td><input type="radio" name="yesno" value="Y"></td>
+                                        <td valign="middle"> Yes</td>
+                                    </tr>
+                                    <tr>
+                                        <td><input type="radio" name="yesno" value="N"></td>
+                                        <td valign="middle"> No</td>
+                                    </tr>
+                                </table>
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Yes/No questions present a question title, a hint (optional), and a radio option of yes or
+                            no. This question is fundamentally no different than a radio question. The only difference
+                            is that yes and no are preprogrammed options. Choosing a different answer will
+                            fire <i>clearReady()</i>. The data saved will be 'Y' for Yes and 'N' for No. Moving
+                            backwards recalls the saved answer.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "yesno"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Ignored</i>
+                        </p>
+
+                        <p>This question does not accept any options.
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Nested Consent</h4>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Nested consent questions are only used on the consent page. They are identical to yes/no
+                            questions, with only a few minor changes to align with the consent.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "nest"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Ignored</i>
+                        </p>
+
+                        <p>This question does not accept any options.
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Number Input</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <form class="code-example">
+                                <input name="number" type="text" size="30" value="12345">
+                            </form>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Number questions present a question title, a hint (optional), and a small box to enter
+                            numbers. When users tap on the box, it will open the android NUMERIC keyboard. The
+                            maximum length that will be saved is 50 characters. Touching the box will fire
+                            clearReady(). Moving backwards recalls the saved answer.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "number"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Ignored</i>
+                        </p>
+
+                        <p>Number does not accept any options
+                        </p>
+
+                    </div>
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Icon Selection</h4>
+                        </div>
+
+
+                        <div class="text-center">
+
+                            <img style="display:inline-block"
+                                 src="data:image/png;base64,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"/>
+
+                            <img style="display:inline-block"
+                                 src="data:image/png;base64,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"/>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Icon questions display pretty icons to the user to tap. Once tapped, the selection turns blue
+                            indicating that the item has been selected. These can be useful for graphic representations
+                            of options. You can have between 2 and 9 options to choose from. Having only two can be a
+                            useful quick selection task for rapid presentation of stimuli. Similarly to the timeRadio,
+                            icons will report how long before the user selected an answer in ms.
+                        </p>
+
+        <pre class="prettyprint linenums">
+"type" : "icons"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Required | Array</i>
+                        </p>
+
+                        <p>The options for this question type MUST consist of an array type. Recall from your JSON
+                            tutorial that arrays are defined as [a,b,c]. Each
+                            item in the array of options should be an object that has three properties: (1) <i>code</i>
+                            which represents the saved value of the question (i.e., what will appear in the database),
+                            (2) <i>value</i> which is what will appear on the screen for the user, but not
+                            the database, and (3) icon, which represents an icon from the package to present. The survey
+                            uses the <a href="http://fortawesome.github.io/Font-Awesome/icons/" target="_blank">FontAwesome
+                                package</a>. You can select any icon in their directory and enter the full code as the
+                            icon, ie. "bed" would be "fa-bed".
+
+                        </p>
+
+        <pre class="prettyprint linenums">
+"options" : [
+        {"code":"bus", "icon":"fa-bus", "value":"Took the Bus"},
+        {"code":"car", "icon":"fa-car", "value":"I Drive"},
+            /* Adding a space then the word "mirrored" to the icon will flip the icon */
+        {"code":"ship", "icon":"fa-boat mirrored", "value":"I Sailed"}
+    ]</pre>
+                    </div>
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Tapper</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <div style="border-radius: 5px; margin: auto; padding-top: 30px; width:200px; height:70px; background: #4CE0AC; color: white;text-align:center">
+                                <b>TAP HERE</b></div>
+                        </div>
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Tapper questions present a question title and a large button for users to tap repeatedly
+                            or just once. For each tap that is made, a UNIX timestamp is registered and pooled. The
+                            timestamps will only be sent to the server when the next slide is rendered. Touching the
+                            button will NOT fire clearReady(). Since the values are timestamps, prior taps will not
+                            be lost when moving backwards.
+                        </p>
+
+                        <p>The data will be in the form of:<br><br><i>Time<sub>1</sub>,Time<sub>2</sub>,Time<sub>3</sub>,...Time<sub>n</sub></i>
+                        </p>
+
+                        <p>NOTE: The timestamp is that of the device itself. If the device has the wrong time,
+                            the timing data will be <b><cite>unusable</cite></b>. Ensure the tablets are NTP
+                            synchronized before the experiment!</p>
+
+        <pre class="prettyprint linenums">
+"type" : "tapper"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Optional | String</i>
+                        </p>
+
+                        <p>The string that will be displayed on the button. If no options value is supplied, the
+                            default text will be "Tap Here".
+                        </p>
+                                <pre class="prettyprint linenums">
+"options" : "Tap Away"</pre>
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Block</h4>
+                        </div>
+
+                        <div class="text-center">
+                            <div class="code-example">
+                                Here is some text for you to read!
+                            </div>
+
+                        </div>
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>Block is simply a textblock that does not allow for any user input. Can be used to create
+                            messages on the screen. What should be filled is the "title" property with the text you
+                            wish to display.
+                        </p>
+
+
+        <pre class="prettyprint linenums">
+"type" : "block"</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Ignored</i>
+                        </p>
+
+                        <p>Block does not accept any options
+                        </p>
+
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Divider</h4>
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+
+                        <p>Allows you to spilt a single questionGroup across a couple of slides giving the
+                            illusion that the user is moving at their own pace. Clicking next on the admin will not move
+                            between questions within this questionGroup. As always, it will move to the next
+                            questionGroup.
+
+                            Adding a divider question as below will show all the questions in series, then when it
+                            encounters the divider, it will add a "Next" button and stop. When the user hits that
+                            button, it hides all the previous questions and now shows everything below it. You can have
+                            many divider questions. The final set of questions after the final divider will have a
+                            button at the end that will send the READY signal and show a wait screen.
+                        </p>
+
+                        <p>It is important that waitNext <b>AND</b> showReady are FALSE in your questionGroup to make
+                            the screen consistent. You should also set noLines to TRUE to hide the divider lines</p>
+
+
+        <pre class="prettyprint linenums">
+"questionGroups" : [
+        {
+           "waitNext": false,
+            "showReady": false,
+            "noLines" : true,
+            "questions" : [
+                { CODE FOR FIRST QUESTION },
+                //divides the pages at this point. Only Question 1 is shown
+                { "code" : "divider1", "type" : "divider" },
+                { CODE FOR QUESTION 2},
+                { CODE FOR QUESTION 3},
+                //divides the pages at this point. Only Questions 2&3 are shown
+                { "code" : "divider2", "type" : "divider" },
+                { CODE FOR QUESTION 4}
+                //the final screen, only Q4 and the 'Finished' button are shown
+            ]
+        }
+    ]</pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Ignored</i>
+                        </p>
+
+                        <p>Divider does not accept any options. </p>
+
+
+                    </div>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Slider</h4>
+                        </div>
+
+                        <div class="text-center">
+
+                            <img src="data:image/png;base64,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"/>
+
+
+                        </div>
+
+
+                        <p class="lead class-name">type <i class="pull-right options">Required | String</i>
+                        </p>
+
+
+                        <p>A slider is a vertical line with a bar that the user can drag based on their own judgement.
+                            The survey will record the position of the slider ever 500ms and store it. This can be
+                            useful to collect continuous measures. Moving backwards will not restore the slider
+                            position, but the data will still be retained.</p>
+
+        <pre class="prettyprint linenums">
+"type" : "slider" </pre>
+
+                        <p class="lead class-name">options <i class="pull-right options">Optional | Object</i>
+                        </p>
+
+                        <p>You can set the labels that appear beside the slider. Not defining a property yields the
+                            default label noted below. If you want to hide a label, make it equal to an empty
+                            string. </p>
+
+    <pre class="prettyprint linenums">
+"options" : {
+        /* Text at the top (default = "max") */
+        "max" : "Very Arousing",
+         /* Text at the middle (default = "mid")
+        if you wanted to hide mid, set it to empty
+        "mid":"" */
+        "mid" : "Neutral",
+         /* Text at the bottom (default = "min") */
+        "min" : "Very Boring"
+
+    }</pre>
+
+                        <p class="lead class-name">Resulting Data <i class="pull-right options">String</i>
+
+                        <p>The resulting data will be a timestamp indicating when the slider began polling. This time
+                            will account for the current timeOffset (see time section). It will then report an integer
+                            representing the value collected each 500ms separated by a comma. If the the researcher went
+                            backwards, then a semicolon will separate the data, followed by "NEW SESSION" and a new
+                            timestamp and so forth</p>
+
+                        <p>The top of the slider is 100, the middle is 50, and the bottom is 0.</p>
+                <pre class="prettyprint linenums">
+1435344313800|50,50,45,42,39,11,0,0,23,72,89,100,100,100,98,94
+</pre>
+
+
+                    </div>
+
+
+                </div>
+                <!--END Question Types-->
+
+                <!--Manifest Example-->
+                <div id="manifest_example">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Manifest Example</h2>
+                    </div>
+
+                    <p>The bulk of your manifest file is the actual questions that you will be asking participants
+                        during your experiment. There are a number of prebuilt question types as part of the
+                        survey package. Each one follows a similar pattern of properties in your manifest and
+                        are detailed below:<br><br>
+                    </p>
+
+                    <div class="detail-box">
+
+      <pre class="prettyprint linenums">
+{
+  "title": "My Special Study",
+  "version": "EEG",
+  "consent": {
+    "signature": true,
+    "body": "&lt;b&gt;Purpose of the Study:&lt;/b&gt;  We are looking to define \"vibrancy\".",
+    "nestedConsent": {
+      "questions": [
+        {
+          "code": "VIDEO",
+          "question": "Do you fully consent to being video taped for the purposes of research?",
+          "type" : "nest"
+        },
+        {
+          "code": "SEE",
+          "question": "Are you aware that you will see videos?",
+          "type" : "nest"
+        }
+      ]
+    }
+  },
+  "language" : { "endText" : "Hold up there" },
+  "demographics": {
+    "questions": [
+      {
+        "code": "Q1",
+        "title": "What is your name?",
+        "hint": "Only your first name please",
+        "type": "text"
+      },
+      {
+        "code": "Q2",
+        "title": "Tell me about your life story",
+        "hint": "Since the beginning",
+        "type": "bigtext"
+      }
+    ]
+  },
+  "questionGroups": [
+    {
+      "showReady": true,
+      "waitNext": false,
+      "questions": [
+        {
+          "code": "fav_dessert",
+          "title": "Select all of the types of dessert you like to eat",
+          "hint": " The answer may not be what it seems",
+          "type": "checkbox",
+          "options": [
+            {
+              "code": "pie",
+              "value": "Pie"
+            },
+            {
+              "code": "cake",
+              "value": "Cake"
+            },
+            {
+              "code": "donut",
+              "value": "Donuts"
+            }
+          ]
+        },
+        {
+          "code": "why_dessert",
+          "title": "Can you tell me why you selected those answers?",
+          "type": "bigtext",
+          "options": "4"
+        }
+      ]
+    },
+    {
+      "showReady": true,
+      "waitNext": true,
+      "questions": [
+        {
+          "code": "flowers",
+          "title": "Which of the following flowers do you like the best? ",
+          "hint": "Hint: You can only select one",
+          "type": "timedRadio",
+          "options": [
+            {
+              "code": 1,
+              "value": "Roses"
+            },
+            {
+              "code": 2,
+              "value": "Lilies"
+            },
+            {
+              "code": 3,
+              "value": "Violets"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}</pre>
+
+                    </div>
+                </div>
+                <!--END Manifest Example-->
+
+                <!--Multiple Versions-->
+                <div id="multiple_versions">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Multiple Versions</h2>
+                    </div>
+
+                    <p>In some scenarios, you may wish to use multiple versions in a single session. Once such
+                        example would be having different wordings for EEG participants as opposed
+                        to non-EEG participants. To create multiple versions, you need to create separate
+                        manifest files for each version, adjust accordingly, and change the version property
+                        of the manifest.<br><br>
+
+                        When prompted to enter your manifest into the survey admin panel, you must click "Save &
+                        New" if you wan to include more versions. The prompt will save the current manifest,
+                        empty itself, and wait for an additional version. There is no official limit to the
+                        number of concurrent versions, but for simplicity, less is more.<br><br>
+
+                        The requirement between surveys is that each version must include the same number
+                        of <var>questionGroups</var> and each group must consist of the same <b>types</b> of
+                        questions, but the answers, question text, and hint may differ. For example, if the
+                        master version consists of a multiple choice question, followed by a text input
+                        question, so must each other version. The question codes need not be in the same order
+                        but must also match between versions.<br><br>
+
+                        This feature is experimental and requires exhaustive testing before launching.
+
+                    </p>
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Property Details</h4>
+                        </div>
+                        <p class="lead class-name">version <i class="pull-right options">Optional | String</i></p>
+
+
+                        <p>The version property of the manifest can be entered as any value you wish. However, if there
+                            is duplication in the version property, then the newest value will overwrite the current
+                            code for the version. Therefore, be careful not to duplicate your version number</p>
+
+                        <p>If you do not enter any version code, the system will automatically assign a value from A-Z
+                            based on the total number of versions already entered. For example, omitting the version
+                            property on the first manifest entered will automatically assign version A. If omitting the
+                            version on the 4th manifest entered, the system will automatically assign version D.</p>
+
+                    <pre class="prettyprint linenums">
+"version" : "EEG"</pre>
+
+                        <br>
+                    </div>
+                </div>
+                <!--END Multiple Versions-->
+
+                <!--The Ready Button-->
+                <div id="layout_components">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Layout Components</h2>
+                    </div>
+
+                    <p>The layout of the survey has components that work to assist and inform the user. These can also
+                        be manipulated using customizations or manifest properties. </p>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Component Details</h4>
+                        </div>
+                        <p class="lead class-name">questionSlide <i class="pull-right options">slide</i>
+                        </p>
+
+                        <p>The main object that holds the questionGroup output
+                        </p>
+
+
+                        <p class="lead class-name">waitSlide <i class="pull-right options">slide</i>
+                        </p>
+
+                        <p>A blank slide used to present simple text in between questions. Called upon when indicating
+                            "waitNext" as true in the questionGroup. Renders as a large blue screen, with white text.
+                        </p>
+
+                        <p class="lead class-name">Ready Button <i class="pull-right options">button</i>
+                        </p>
+
+                        <p>Marking "showReady" for a questionGroup as true will print a Ready Button at the bottom of
+                            the slide. The ready button is simply a tool to help the investigator determine if it is
+                            safe to move onto the next question. Clicking on the ready button will change its color and
+                            text to <var>language.readyDn</var>. Changing your answer will reset the color and text to
+                            <var>language.readyUp</var>. When clicking ready, the tablet sends a READY cmd to the admin
+                            to indicate that the user is ready to proceed. If someone changes an answer it will fire
+                            <i>clearReady()</i> which will signal the admin that the user is no longer ready and revert
+                            the button back to the original color and text. <br><br>
+
+                            Saving of data is completely INDEPENDENT from the ready button. It is merely a signal, and
+                            in no way influences the saving of data. Data is polled and saved on a move command, not by
+                            the ready button. Entering an answer, but not clicking ready does not mean the entered data
+                            will not be saved.
+                        </p>
+
+
+                    </div>
+                </div>
+                <!--END The Ready Button-->
+
+
+                <div id="osc">
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Navigation/OSC</h2>
+                    </div>
+                    <p>The tablets navigate through the survey manifest in a predictable way. There are a few
+                        predetermined outcomes and logic paths as follows.
+                        The tablets can also receive commands from OSC. The default port is listens on is port defined
+                        in
+                        <jsfile>server.js</jsfile>
+                        plus 5.
+                    </p>
+                    <p>Default port is <i>9130</i></p>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Commands</h4>
+                        </div>
+                        <p class="lead class-name">Move Forward </p>
+
+                        <p>When moving forward, the tablets will determine the current <var>groupIndex</var> and
+                            increase it by one. Then it sends a broadcast render to all the tablets to move to the
+                            specific group that is calculated. I.e., it does not tell the tablets to go "NEXT", it tells
+                            the tablets to go from slide 2 to 3. If the current group also has a waitNext set to true,
+                            then the following slide when clicking "Next" will be a wait screen, not the next group.
+                            This is to hide the question on all the screens when the answering period is over. Clicking
+                            next again will show the new question.</p>
+
+                        <p> Next can be accessed via the button on the admin page, or via OSC as below:
+                        </p>
+
+                         <pre class="prettyprint linenums">
+/cue/next/start</pre>
+
+                        <p class="lead class-name">Move Backwards </p>
+
+                        <p>You can move backwards in the slide progression with the previous button on the admin page.
+                            This is <B>not</B> a recommended path as there may be unpredicted errors as a result! The
+                            previous command will reduce the <var>groupIndex</var> by one and send a broadcast render.
+                            It will ignore all reference to the waitNext and simply show the question screen. Clicking
+                            previous when on the FIRST question slide will revert the tablets to the consent mode.
+                            Questions that were previously answered will restore their previous answer, with some
+                            exceptions (see dataTypes section).</p>
+
+                        <p>Previous can be accessed via the button on the admin page, or via OSC as below:
+                        </p>
+
+                         <pre class="prettyprint linenums">
+/cue/prev/start</pre>
+
+                        <p class="lead class-name">Blank Screens </p>
+
+                        <p>Toggles the screen visibility on all tablets. Can be accessed from the admin panel or via OSC
+                            as follows:
+                        </p>
+
+                         <pre class="prettyprint linenums">
+/cue/blank/start</pre>
+
+
+                        <p class="lead class-name">Move to Specific Index </p>
+
+                        <p>Moves all tablets to the specified index. Replace INDEX with the index number to enter. This
+                            will ignore any calls to waitNext and will save any current data on the screen. Can be
+                            access via the admin panel through the index dropdown or via OSC:
+                        </p>
+
+                         <pre class="prettyprint linenums">
+/cue/slide/INDEX</pre>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div id="DatabaseStructure">
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Database Structure</h2>
+                    </div>
+                    <p>The data on the tablet screen is saved only when moving between slides. That means when someone
+                        selects an answer on the tablet, that answer is not saved into the database until the researcher
+                        moves to the next question by navigating "NEXT". Each question is saved to a corresponding
+                        column in a MySQL database. When building your survey with the admin, the application will parse
+                        your manifest and determine which columns need to be created and does so.
+
+                    </p>
+
+                    <p>The database will have a unique table for each survey created in the form of
+                        "tablet_studies"."survey_[[SURVEY CODE]]".</p>
+
+                    <P>Logs are stored in the ./logs/ directory and are accessible via FTP or via the admin panel upon
+                        completing the survey. The database is accessible via a PhpMyAdmin installation on the
+                        server.</P>
+
+                    <p>At this time, neither the database nor the logs are deleted when closing the admin panel. They
+                        are kept indefinitely. A watch should be kept on the remaining storage space of the server and
+                        delete accordingly.</p>
+
+
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Columns</h4>
+                        </div>
+                        <p class="lead class-name">Default Columns </p>
+
+                        <p>The following columns will be present in each table</p>
+
+
+                         <pre class="prettyprint linenums">
+ /*
+--------------------------------------------------------------
+| hash        |   The unique hash generated by the tablet    |
+| tablet      |   The last reported IP address of the tablet |
+| last_update |   The last timestamp the row was updated     |
+| version     |   The version number the tablet ran          |
+| notes       |   Any notes made during a drop in            |
+--------------------------------------------------------------
+ */
+                         </pre>
+
+                        <p class="lead class-name">Question Columns </p>
+
+                        <p>Each question will have an associated column. The format will be:</p>
+
+
+
+                         <pre class="prettyprint linenums">
+/*
+     question_[[INDEX]]_[[QUESTIONCODE]]
+
+     Where [[INDEX]] is either the index of the slide in the questionGroup,
+     or 'c' for consent questions, or 'd' for demographic questions.
+
+     And [[QUESTIONCODE]] is the "code" property for the question in the
+     manifest.If the admin reports that there is a duplicated column name,
+     that means that you have two or more questions with the same "code"
+
+*/
+                         </pre>
+
+
+                    </div>
+
+
+                </div>
+
+
+                <div id="time_functions">
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Time Functions</h2>
+                    </div>
+
+                    <p>Certain features of the tablet, such as the slider, or tapper, require a synchronized clock.
+                        Ideally, you want the tablets synchronized to an NTP server using the NTP protocol; however,
+                        that may not always be an option. There is a function that I built into the tablets to try and
+                        synchronize to the main server so that the timestamps are more accurate. This is NOT guaranteed
+                        and is not the most ideal solution.</p>
+
+                    <p>The time offset is calculated by polling the server for its current time repeatedly, and
+                        calculating the average roundtrip time. Then, for the final trip, it calculates the offset
+                        between the tablet and server clock and adjusts the internal offset. This is only retained for
+                        one session. It adds the calculated offset to any instance where a timestamp will be
+                        captured</p>
+
+                    <p>The sync function can only be called via OSC and should only be called once per session. At least
+                        10-15 seconds should be held before any other activity to ensure accuracy.</p>
+
+                    <div class="detail-box">
+                        <p>Call the function via OSC as such:</p>
+                    <pre class="prettyprint linenums">
+/cue/time/start</pre>
+                    </div>
+                </div>
+
+                <!--Custom_Datatypes-->
+                <div id="custom_datatypes">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+
+                        <h2>Custom DataTypes</h2>
+                    </div>
+
+                    <p>For some experiments, you may wish to include new types of non-standard questions that were
+                        not included in the original release of the tablet software. Using
+                        this method, you can create new types of questions to include.<br><br>
+
+                        Each new type of question is defined by adding a new property to the <var>dataTypes</var> object
+                        house in the
+                        <jsfile>modules.js</jsfile>
+                        file. The value of the key represents the name of the question type, as well as how to call
+                        upon it in your survey manifest. Each new dataType must have <i>getHTML()</i> function,
+                        <i>getValue()</i> function, a <i>databaseType</i> string, and optionally, an <i>init()</i>
+                        function.<br><br>
+
+                        It is strongly suggested that you review the existing <var>dataTypes</var> object to examine
+                        and learn how the existing questions are created before creating your own. This
+                        customization
+                        requires an advanced knowledge of javascript. Only edit between the lines of
+                        <jsfile>modules.js</jsfile>
+                        where the comments indicate it is safe to do so.
+
+                    </p>
+                    <!-- /Class Overview -->
+
+
+                    <!-- detail-box Class Detail -->
+                    <div class="detail-box">
+                        <div class="page-header">
+                            <h4 id="class-desc">Example</h4>
+                        </div>
+                        <p class="lead class-name">modules.js </p>
+                            <pre class="prettyprint linenums">
+datatypes["text"] = {
+  getHTML : function (text, hint, objects, qid)
+             {
+                return "&#x3C;h2&#x3E;"+text+"&#x3C;/h2&#x3E;&#x3C;h3&#x3E;"+hint+"&#x3C;/h3&#x3E;&#x3C;br&#x3E;&#x3C;input type=\"text\" id="+qid+" /&#x3E;";
+             },
+  getValue : function (qid)
+             {
+                return $("#"+qid).val();
+             },
+  databaseType : "VARCHAR (200)"
+
+}</pre>
+                    </div>
+                    <!-- /.detail-box Class Detail -->
+
+
+                    <!-- detail-box Property Detail -->
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Property Details</h4>
+                        </div>
+                        <p class="lead class-name">getHTML <i class="pull-right options">Required | Returns
+                            String</i>
+                        </p>
+
+                        <p>This property is called upon to generate the HTML required for the question. The returned
+                            value from the function must be HTML in a string to render the question. Any HTML or
+                            javascript can be used to generate the output. The parameters given to the question are
+                            derived from the survey manifest.
+                        </p>
+                            <pre class="prettyprint linenums">
+getHTML : function (text, hint, objects, qid)
+{
+    /*
+    text - The is the forwarded value from survey.questionGroups[n].questions[n].title; Value String
+    hint - The is the forwarded value from survey.questionGroups[n].questions[n].hint; Value String
+    objects - The is the forwarded value from survey.questionGroups[n].questions[n].options; Value
+                is determined by content
+    qid - The full question identifier created by the survey.js file; Value is string; Your input must
+            set the NAME attribute of the input and the ID attribute to the qid
+    */
+
+    return OUTPUT;
+}</pre>
+
+
+                        <p class="lead class-name">getValue <i class="pull-right options">Required | Returns
+                            String</i>
+                        </p>
+
+                        <p>This property is called when the survey is looking to save results. No specific
+                            documentation can be written as each new question type must have its own strategy
+                            of collecting, storing, and returning the data. However, this function is given
+                            a <i>qid</i> to choose from. Using that, you must provide some form of function
+                            that will find the data you wish to save, and return it using this function. The
+                            returned value must be a string that can be saved to the database.
+                        </p>
+                            <pre class="prettyprint linenums">
+getValue : function (qid)
+{
+    //qid - The full question identifier created by the survey.js file; Value is string;
+
+     return VALUE;
+
+}</pre>
+
+
+                        <p class="lead class-name">init <i class="pull-right options">Optional | Returns boolean</i>
+                        </p>
+
+                        <p>This is an optional function that will get called when the question is displayed. It is
+                            not required, but may be used to initiate certain commands only at the time of
+                            rendering. This function is also passed the qid of the question.
+                        </p>
+                            <pre class="prettyprint linenums">
+init : function (qid)
+{
+    //qid - The full question identifier created by the survey.js file; Value is string;
+
+     $("#"+qid).addClass('spooky_ghost');
+     var x = ($("#"+qid).hasClass('spooky_ghost')) ? true : false;
+     return x;
+
+}</pre>
+
+                        <p class="lead class-name">databaseType <i class="pull-right options">Required | String</i>
+                        </p>
+
+                        <p>This is the MySQL notation for the value contained in the column. See a full
+                            list/documentation for this at at the <a
+                                    href="https://dev.mysql.com/doc/refman/5.5/en/data-type-overview.html"
+                                    target="_blank">MySQL 5.5 DataTypes Documentation</a>.
+                        </p>
+                            <pre class="prettyprint linenums">
+databaseType : "VARCHAR (200)"</pre>
+
+
+                    </div>
+
+
+                </div>
+                <!--END Custom_Datatypes-->
+
+
+                <!--Further Customization-->
+                <div id="further_customization">
+
+                    <div class="page-header">
+                        <a class="scroll pull-right">
+                            <span class="label label-info"><i class="icon-white icon-arrow-up"></i></span>
+                        </a>
+                        </a>
+
+                        <h2>Further Customization</h2>
+                    </div>
+
+                    <p>There are additional customizations that can be done to the survey as needed. It is highly
+                        recommended to edit safely, and make plenty of backups of the original files. Never edit things
+                        you are unsure of as they can affect the saving of the actual data you collect.
+
+                    </p>
+                    <!-- /Class Overview -->
+
+
+                    <!-- detail-box Property Detail -->
+                    <div class="detail-box">
+                        <div class="page-header">
+
+                            <h4>Potential Customizations</h4>
+                        </div>
+                        <p class="lead class-name">style.css </p>
+
+                        <p>To change the syle of the survey, yo have to edit the style.css file in the main application
+                            folder. Be careful to make a backup before making any changes</p>
+
+
+                        <p class="lead class-name">Adding Images </p>
+
+                        <p>Images can be added to any point in the survey by including an <a
+                                href="http://www.w3schools.com/tags/tag_img.asp" target="_blank">&lt;img&gt;</a> tag
+                            within your code. The src parameter should equal the <a
+                                    href="https://en.wikipedia.org/wiki/Data_URI_scheme#HTML" target="_blank">base64
+                                encoded</a> image you wish to present. Once you have the base64 code in an &lt;img&gt;
+                            tag, you add it to
+                            the string value of any paramater in the manifest. For example, to add an image to the
+                            consent
+                            body, add the tag where you normally add text as such:
+                        </p>
+                            <pre class="prettyprint linenums">
+"consent": {
+    "body" : "Look deep into this picture &lt;img src='data:image/png;base64,iVBORw0KGgoAA
+AANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0l
+EQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6
+P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC' height='60' width='104'&gt;"
+}</pre>
+
+                        <p>To add an image to a question title, you would do it as such:</p>
+
+                                                    <pre class="prettyprint linenums">
+{
+                ***rest of question code
+    "title" : "Write what you think about this picture:&lt;br&gt; &lt;img src='data:image/png;base64,iVBORw0KGgoAA
+AANSUhEUgAAABAAAAAQAQMAAAAlPW0iAAAABlBMVEUAAAD///+l2Z/dAAAAM0l
+EQVR4nGP4/5/h/1+G/58ZDrAz3D/McH8yw83NDDeNGe4Ug9C9zwz3gVLMDA/A6
+P9/AFGGFyjOXZtQAAAAAElFTkSuQmCC' height='60' width='104'&gt;"
+                ***rest of question code
+}</pre>
+
+                        <p class="lead class-name">Get Base64 Code of an Image </p>
+
+                        <p><input type="file" id="base64input"></p>
+                        <textarea id="result64"
+                                  style="border: 2px dashed orangered; display:none; overflow: scroll; padding: 15px; min-width: 650px;"></textarea>
+
+                    </div>
+
+
+                </div>
+                <!--END Further Customization-->
+
+
+                <div class="shadow-right"></div>
+            </div>
+        </div>
+    </div>
+</article>
+
+
+<footer>
+    <div class="footer">
+        <div class="container">
+            <p>Authored By: Carl Karichian, Last Updated <span class="authordate"></span>.</p>
+        </div>
+    </div>
+</footer>
+
+
+<script type="text/javascript">
+
+    /*
+     TODO How the admin works
+     TODO How the builder words
+     todo quickstart
+     todo drop ins
+
+     TODO Future directions - improving efficiency, better timing resolution,
+
+     todo tablet functionality - apk blocks all, how to install apks, external usage, dofresh accessing
+     TODO Handling of connections, url, dns, external, and default assigned ports
+
+     todo further clarify that multiple versions are for
+     */
+
+    jQuery(document).ready(function ($) {
+
+        $('.authordate').text('July 3, 2015');
+
+        // make code pretty demo
+        window.prettyPrint && prettyPrint();
+
+        $(".scroll").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({scrollTop: 0}, "slow");
+
+        });
+
+        var index = 1;
+        $('h2').each(function () {
+            $(this).attr("id", "index_" + index);
+            var t = $(this).text();
+            //var c = t.toLowerCase().replace(/ /g, '_').replace(/./g, '');
+
+            $('.nav-stacked').append('<li><a href="#index_' + index + '" class="anchor"><i class="icon-chevron-right pull-right"></i>' + t + '</a></li>');
+            $(this).prepend(index + '. ');
+            index++;
+
+        });
+
+        $(".anchor").click(function (event) {
+            event.preventDefault();
+            $("html, body").animate({scrollTop: $(this.hash).offset().top - 80}, "slow");
+
+        });
+
+        function readImage(input) {
+            if (input.files && input.files[0]) {
+                var FR = new FileReader();
+                FR.onload = function (e) {
+                    $('#result64').text('<img src=\'' + e.target.result + '\'>').show().select();;
+                };
+                FR.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#base64input").change(function () {
+            console.log('file uploaded');
+            readImage(this);
+        });
+
+    });
+
+
+</script>
+
+</body>
+</html>
